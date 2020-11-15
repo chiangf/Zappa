@@ -613,3 +613,8 @@ def keep_warm_callback(event, context):
     """Method is triggered by the CloudWatch event scheduled when keep_warm setting is set to true."""
     lambda_handler(event={}, context=context)  # overriding event with an empty one so that web app initialization will
     # be triggered.
+
+
+# Load the app code during lambda initialization to take advantage of the resource boost with slim_handler
+# Background: https://github.com/Miserlou/Zappa/issues/1974
+LambdaHandler()
